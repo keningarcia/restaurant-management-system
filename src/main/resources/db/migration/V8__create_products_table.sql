@@ -1,0 +1,14 @@
+CREATE TABLE products (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE,
+    description VARCHAR(500),
+    price DECIMAL(10,2) NOT NULL,
+    category_id BIGINT NOT NULL REFERENCES categories(id),
+    status VARCHAR(20) NOT NULL DEFAULT 'AVAILABLE',
+    image_url VARCHAR(255),
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    created_by BIGINT NOT NULL DEFAULT 0,
+    updated_by BIGINT NOT NULL DEFAULT 0,
+    active BOOLEAN NOT NULL DEFAULT TRUE
+);

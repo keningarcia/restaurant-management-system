@@ -1,0 +1,2 @@
+-- H2 does not support all PostgreSQL types, this file ensures compatibility.
+-- The main migrations will run; this is a placeholder for H2-specific overrides.

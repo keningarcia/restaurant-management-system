@@ -1,0 +1,12 @@
+CREATE TABLE restaurant_tables (
+    id BIGSERIAL PRIMARY KEY,
+    table_number VARCHAR(10) NOT NULL UNIQUE,
+    capacity INTEGER NOT NULL,
+    location VARCHAR(50),
+    status VARCHAR(20) NOT NULL DEFAULT 'AVAILABLE',
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    created_by BIGINT NOT NULL DEFAULT 0,
+    updated_by BIGINT NOT NULL DEFAULT 0,
+    active BOOLEAN NOT NULL DEFAULT TRUE
+);
