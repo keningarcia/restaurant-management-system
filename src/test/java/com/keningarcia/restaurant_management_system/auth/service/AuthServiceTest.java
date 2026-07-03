@@ -72,7 +72,7 @@ class AuthServiceTest {
         when(userRepository.existsByEmail("test@test.com")).thenReturn(false);
         when(roleService.findByName(RoleEnum.WAITER)).thenReturn(waiterRole);
         when(passwordEncoder.encode("password123")).thenReturn("encoded");
-        when(jwtTokenProvider.generateToken("testuser")).thenReturn("token");
+        when(jwtTokenProvider.generateToken("testuser", 1L)).thenReturn("token");
 
         var savedUser = User.builder()
                 .id(1L).username("testuser").email("test@test.com")

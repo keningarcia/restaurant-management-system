@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,6 +56,12 @@ public class OrderController {
     @PreAuthorize("hasAnyAuthority('ADMIN', 'WAITER', 'CHEF')")
     public ResponseEntity<OrderResponse> updateStatus(@PathVariable Long id, @RequestParam String status) {
         return ResponseEntity.ok(orderService.updateStatus(id, status));
+    }
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'WAITER')")
+    public ResponseEntity<OrderResponse> update(@PathVariable Long id, @Valid @RequestBody OrderRequest request) {
+        return ResponseEntity.ok(orderService.update(id, request));
     }
 
     @DeleteMapping("/{id}")

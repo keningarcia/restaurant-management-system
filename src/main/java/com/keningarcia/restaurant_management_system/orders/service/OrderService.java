@@ -99,6 +99,40 @@ public class OrderService {
     }
 
     @Transactional
+    public OrderResponse update(Long id, OrderRequest request) {
+        var order = findOrder(id);
+
+        var table = tableRepository.findById(request.tableId())
+                .orElseThrow(() -> new ResourceNotFoundException("Mesa no encontrada: " + request.tableId()));
+
+        var employee = employeeRepository.findById(request.employeeId())
+                .orElseThrow(() -> new ResourceNotFoundException("Empleado no encontrado: " + request.employeeId()));
+
+        order.setTable(table);
+        order.setEmployee(employee);
+        order.setNotes(request.notes());
+
+        if (request.customerId() != null) {
+            var customer = customerRepository.findById(request.customerId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado: " + request.customerId()));
+            order.setCustomer(customer);
+        } else {
+            order.setCustomer(null);
+        }
+
+        order.getDetails().clear();
+
+        var details = request.details().stream()
+                .map(detailRequest -> createDetail(detailRequest, order))
+                .toList();
+
+        order.getDetails().addAll(details);
+        recalculateTotals(order);
+
+        return orderMapper.toResponse(orderRepository.save(order));
+    }
+
+    @Transactional
     public void delete(Long id) {
         var order = findOrder(id);
         order.setActive(false);

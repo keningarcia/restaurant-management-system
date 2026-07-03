@@ -1,5 +1,6 @@
 package com.keningarcia.restaurant_management_system.config;
 
+import com.keningarcia.restaurant_management_system.security.UserPrincipal;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -18,6 +19,10 @@ public class AuditConfig implements AuditorAware<Long> {
         if (auth == null || !auth.isAuthenticated()) {
             return Optional.of(0L);
         }
-        return Optional.of(Long.valueOf(auth.getName()));
+        Object principal = auth.getPrincipal();
+        if (principal instanceof UserPrincipal userPrincipal) {
+            return Optional.of(userPrincipal.getUserId());
+        }
+        return Optional.of(0L);
     }
 }
