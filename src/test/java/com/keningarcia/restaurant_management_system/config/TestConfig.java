@@ -1,7 +1,7 @@
 package com.keningarcia.restaurant_management_system.config;
 
-import com.keningarcia.restaurant_management_system.roles.entity.Role;
-import com.keningarcia.restaurant_management_system.roles.enums.RoleEnum;
+import com.keningarcia.restaurant_management_system.entity.Role;
+import com.keningarcia.restaurant_management_system.enums.RoleEnum;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

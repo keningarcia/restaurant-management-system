@@ -1,7 +1,7 @@
 package com.keningarcia.restaurant_management_system.security;
 
-import com.keningarcia.restaurant_management_system.users.entity.User;
-import com.keningarcia.restaurant_management_system.users.repository.UserRepository;
+import com.keningarcia.restaurant_management_system.entity.User;
+import com.keningarcia.restaurant_management_system.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
